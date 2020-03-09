@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function Queue() {
+				var items = [];
+
+				function Q(element, priority) {
+					this.element = element;
+					this.priority = priority;
+				}
+
+				//添加元素
+				this.add = function(element, priority) {
+					var queEle = new Q(element, priority);
+					if(items.length == 0) {
+						items.push(queEle)
+					} else {
+						var flag = false;
+						for(var i = 0; i < items.length; i++) {
+							if(items[i].priority > queEle.priority) {
+								items.push(queEle);
+								flag = true;
+								break;
+							}
+						}
+						if(!flag) {
+							items.push(queEle)
+						}
+					}
+				}
+
+				// 删除元素的方法
+				this.dequeue = function() {
+					return items.shift()
+				}
+
+				// 获取前端的元素
+				this.front = function() {
+					return items[0]
+				}
+
+				// 查看元素是否为空
+				this.isEmpty = function() {
+					return items.length == 0
+				}
+
+				// 获取元素的个数
+				this.size = function() {
+					return items.length
+				}
+
+			}
+
+			var queue = new Queue();
+			queue.add('Wen', 8);
+			queue.add('jing', 10);
+			queue.add('Yang', 5);
+			//			for(var i=0;i<=queue.size();i++){
+			//				 var item = queue.dequeue()
+			//				console.log(item.element + "-" + item.priority)
+			//			}
+			console.log(queue.dequeue())
+		</script>
+	</body>
+
+</html>

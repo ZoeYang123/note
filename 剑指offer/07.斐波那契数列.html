@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列
+			 * 的第n项（从0开始，第0项为0）。n<=39
+			 */
+
+            //递归
+//			function Fibonacci(n) {
+//				if (n==0) return 0;
+//				if(n==1 || n==2){
+//					return 1;
+//				}
+//				return Fibonacci(n-1)+Fibonacci(n-2)
+//				
+//			}
+			
+			//数组加循环
+//			function Fibonacci(n) {
+//				var arr=[0,1,1];
+//				for(let i=3;i<=n;i++){
+//					arr[i]=arr[i-1]+arr[i-2];
+//				}
+//				return arr[n]
+//				
+//			}
+			
+			//动态规划版
+			function Fibonacci(n){
+				let f=0,g=1;
+				while(n--){
+					g=g+f;
+					f=g-f;
+				}
+				return f;
+			}
+			let a=Fibonacci(6);
+			console.log(a)
+		</script>
+	</body>
+
+</html>

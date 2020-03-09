@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript" src="babel.min.js" ></script>
+		<script type="text/babel">
+			//@jsx createElement
+			var vDom=(<div id="id" name="app">hello
+			  <ul>
+			      <li name="1">1</li>
+			      <li>2</li>
+			  </ul>
+			</div>)
+			function createElement(nodeName,attr,...args){
+				return {nodeName:nodeName,attr,children:[].concat(...args)}
+			}
+			
+			function render(vnode){
+				//如果是文本
+				if(vnode.split){
+					return document.createTextNode(vnode)
+				}
+				
+				var node=document.createElement(vnode.nodeName);
+				//添加属性				
+				let attr=vnode.attr || {};
+				Object.keys(attr).forEach(k=>{
+					node.setAttribute(k,attr[k])
+				});
+				
+				//添加子节点
+				(vnode.children || []).forEach((n)=>{
+					node.appendChild(render(n))
+				});
+				
+				return node;
+			}
+			
+			var domF=render(vDom);
+//			//console.log(domF)
+     		document.body.appendChild(domF)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+			 * 例如输入数组{3，32，321}，则打印出这三个数字能排成的最小数字为321323。
+			 * */
+
+            //比较两个字符串s1, s2大小的时候，先将它们拼接起来，比较s1+s2,和s2+s1那个大，如果s1+s2大，那说明s2应该放前面
+			function PrintMinNumber(numbers) {
+				// write code here
+				var arr=numbers;
+				if(arr.length===0){
+					return ""
+				}
+				for(var i=0;i<arr.length;i++){
+					for(var j=i+1;j<arr.length;j++){
+						if(arr[i]+""+arr[j]>arr[j]+""+arr[i]){
+							var tar=arr[i];
+							arr[i]=arr[j];
+							arr[j]=tar;
+						}
+					}
+				}
+				return parseInt(arr.join(""));
+			}
+			
+			var a=PrintMinNumber([3,32,321])
+			console.log(a)
+		</script>
+	</body>
+
+</html>

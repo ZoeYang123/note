@@ -1,0 +1,9 @@
+JSX 是 JavaScript 的一种语法扩展，并拥有 JavaScript 的全部功能。
+
+JSX是一种JavaScript的语法扩展，运用于React架构中，你可以将任何的 JavaScript 表达式封装在花括
+号里，然后将其嵌入到 JSX 中。在编译完成之后，JSX 表达式就变成了常规的 JavaScript 对象，这意味
+着你可以在 if 语句和 for 循环内部使用 JSX，将它赋值给变量，接受它作为参数，并从函数中返回它，
+利用JSX实现虚拟DOM。
+
+因为JSX的特性更接近JavaScript而不是HTML，所以React DOM使用camelCase（小驼峰）命名来定义属性
+的名称，而不是使用HTML的属性名称。

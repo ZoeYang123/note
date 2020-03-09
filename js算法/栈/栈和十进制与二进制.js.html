@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function Stack() {
+				var item = [];
+				//进栈
+				this.push = function(ele) {
+					item.push(ele)
+				}
+				//出栈
+				this.pop = function() {
+					return item.pop();
+				}
+
+				//返回栈顶
+				this.peak = function() {
+					return item[item.length - 1]
+				}
+
+				//长度
+				this.size = function() {
+					return item.length;
+				}
+
+			}
+			// 封装十进制转二进制的函数
+			function dec2bin(decNumer) {
+				var stack = new Stack();
+				var remainder; //余数
+				while(decNumer > 0) {
+					remainder = decNumer % 2;
+					decNumer = Math.floor(decNumer / 2);
+					stack.push(remainder)
+				}
+
+				//取出来
+				var b = "";
+				while(stack.size() > 0) {
+					b += stack.pop()
+				}
+				return b;
+
+			}
+		</script>
+	</body>
+
+</html>

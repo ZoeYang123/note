@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			//求1+2+3+...+n，公式为n*(n+1)/2要求不能使用乘除法、for、while、if、else、switch、case等
+			//关键字及条件判断语句（A?B:C）。
+			
+			//1.递归
+//			function Sum_Solution(n) {
+//				// write code here
+//				let a=n;
+//				//&&就是逻辑与，逻辑与有个短路特点，前面为假，后面不计算
+//				a && (a+=Sum_Solution(n-1));
+//				return a;
+//			}
+			
+			//2.右移运算符>>,右移运算可以模拟 2 的整除运算,左移运算符相当于*2			
+			function Sum_Solution(n) {
+				// write code here
+				//return (n**2+n)>>1
+				return (Math.pow(n,2)+n)>>1
+			}
+			
+			
+			var a=Sum_Solution(10);
+			console.log(a)
+		</script>
+	</body>
+
+</html>

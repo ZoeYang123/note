@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//队列的特点先进先出，将通过的元素删除再添加至后端，未通过的直接删除
+			function QueueList(arr,item){
+				var newArr=arr.slice(0);
+				while(newArr.length>1){
+					for(var i=0;i<item-1;i++){
+						newArr.push(newArr.shift())
+					}
+					newArr.shift()
+				}
+				return {
+					s:newArr,
+					i:arr.indexOf(newArr[0])
+				}
+			}
+			var result=QueueList(['1','2','3','4','5'],3);
+			console.log(result.i)
+		</script>
+	</body>
+</html>

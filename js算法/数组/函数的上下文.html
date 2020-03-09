@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function speak(fn, obj) {
+				return fn.apply(obj);//1.
+				return fn.call(obj);//2.
+				return fn.bind(obj)();//3.
+			}
+			var a=speak(function () {return this.greeting + ', ' + this.name + '!!!';}, {greeting: 'Hello', name: 'Rebecca'});
+			console.log(a)
+		</script>
+	</body>
+
+</html>

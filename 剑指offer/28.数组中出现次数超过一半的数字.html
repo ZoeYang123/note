@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			/*数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入
+			 * 一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超
+			 * 过数组长度的一半，因此输出2。如果不存在则输出0。
+			 */
+
+			//1.
+			//			function MoreThanHalfNum_Solution(numbers) {
+			//				// write code here
+			//				var str=numbers.join("");
+			//				for(let i=0;i<str.length;i++){				
+			//					if((str.split(str[i]).length-1)>numbers.length/2){
+			//						return str[i];
+			//						break;
+			//					}
+			//				}
+			//				return 0;
+			//			}
+
+			//2.检测数组的中间数，如果出现次数超过数组长度的一半，就返回该数字，否则为0
+			function MoreThanHalfNum_Solution(numbers) {
+				// write code here
+				if(numbers.length == 0 || numbers == null) {
+					return 0;
+				}
+				const newArr = numbers.sort((a, b) => a - b);
+				var target = numbers[parseInt(numbers.length / 2)];
+				let count = 0;
+				for(let i = 0; i < numbers.length; i++) {
+					if(target == numbers[i]) {
+						count++;
+					}
+					if(count > (numbers.length / 2)) {
+						return numbers[i]
+					}
+				}
+				return 0
+			}
+
+			console.log(a)
+		</script>
+	</body>
+
+</html>
