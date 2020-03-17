@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
 
-	<body>
-		<script>
-			//用两个栈来实现一个队列，完成队列的Push和Pop操作。 
-			//队列中的元素为int类型。
-			function push(node) {
-				// write code here
-				strack1.push(node)
-			}
+<body>
+	<script>
+		//用两个栈来实现一个队列，完成队列的Push和Pop操作。 
+		//队列中的元素为int类型。
+		var strack1 = [], strack2 = [];
+		function push(node) {
+			// write code here
+			strack1.push(node)
+		}
 
-			function pop() {
-				// write code here
+		function pop() {
+			// write code here
+			if (strack2.length == 0) {
+				if (strack1.length) {
+					return null;
+				} else {
+					for (let i = 0; i < strack1.length; i++) {
+						strack2.push(strack1.pop())
+					}
+					return strack2.pop()
+				}
+			} else {
+				return strack2.pop()
 			}
-		</script>
-	</body>
+		}
+	</script>
+</body>
 
 </html>

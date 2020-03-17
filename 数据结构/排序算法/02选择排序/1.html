@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>选择排序</title>
+</head>
+
+<body>
+    <script>
+        function selectSort(arr) {
+            for(let i=0;i<arr.length-1;i++){
+                let minI=i;
+                for(let j=i+1;j<arr.length;j++){
+                    if(arr[minI]>arr[j]){
+                        minI=j;
+                    }
+                }
+                if(minI!==i){
+                    [arr[i],arr[minI]]=[arr[minI],arr[i]]
+                }
+            }
+            return arr;
+        }
+
+        let a = selectSort([6,1,4,2,3,5]);
+        console.log(a)
+    </script>
+</body>
+
+</html>

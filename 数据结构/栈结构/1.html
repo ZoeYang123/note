@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <a href="https://www.jianshu.com/p/eade026ffaf5">栈结构博客地址</a>
+    <script>
+        
+
+        function Stack() {
+            var items = [];
+            this.push=function (node){
+                items.push(node)
+            }
+            this.pop=function(){
+                return items.pop()
+            }
+            //查看栈顶元素
+            this.peek=function(){
+                return items[items.length-1]
+            }
+            this.isEmpty=function(){
+                return items.length===0
+            }
+            this.size=function(){
+                return items.length
+            }
+        }
+
+        class Stack{
+            constructor(){
+                this.items=[];
+            }
+            push(node){
+                this.items.push(node)
+            }
+            pop(){
+                return this.items.pop()
+            }
+            peek(){
+                return this.items[this.items.length-1]
+            }
+            size(){
+                return this.items.length;
+            }
+        }
+
+        var stack = new Stack();
+        stack.push(5);
+        stack.push(6);
+        var a=stack.peek()
+        console.log(a)
+    </script>
+</body>
+
+</html>

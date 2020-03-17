@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>十进制转二进制</title>
+</head>
+
+<body>
+    <script>
+        //将十进制转换为二进制
+
+        //栈结构
+        function Stack() {
+            var items = [];
+            this.push = function (node) {
+                items.push(node)
+            }
+            this.pop = function () {
+                return items.pop()
+            }
+            //查看栈顶元素
+            this.peek = function () {
+                return items[items.length - 1]
+            }
+            this.isEmpty = function () {
+                return items.length === 0
+            }
+            this.size = function () {
+                return items.length
+            }
+        }
+
+        function dec2bin(number) {
+            var stack = new Stack();
+
+            //进栈
+            var a;
+            while (number > 0) {
+                a = number % 2;
+                number = parseInt(number / 2);
+                stack.push(a);
+            }
+
+            //出栈
+            var b = "";
+            while (!stack.isEmpty()) {
+                b += stack.pop()
+            }
+            return parseInt(b);
+
+
+        }
+        var a = dec2bin(9);
+        console.log(a)
+    </script>
+</body>
+
+</html>

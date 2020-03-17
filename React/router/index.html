@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>手写路由</title>
+</head>
+
+<body>
+    <ul>
+        <li onclick="router.push('/')">首页</li>
+        <li onclick="router.push('/list')">文章</li>
+        <li onclick="router.push('/detail')">详情</li>
+    </ul>
+    <script>
+        function Router(){
+
+        }
+
+        let router=new Router();
+
+        Router.prototype.push=function(url){
+            window.location.href=document.location.toString()+url;
+            console.log(document.location.toString())
+        }
+
+    </script>
+</body>
+
+</html>
