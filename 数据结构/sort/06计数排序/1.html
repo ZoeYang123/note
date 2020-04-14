@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>计数排序</title>
+</head>
+<!-- 1.有一组整数序列 A,找到A中的最大值 max
+2.新建累计数组B, B.length 为 max+1 ,这样的话B的最后一个元素下标为max
+3.数组B值以0填充,开始计数, A中元素出现一次, 对应的B位置值加一,计算下标值在A中出现的频次
+4.把B中每个元素与之前元素进行累加,表示已占用空间,奇妙发生在此,当前占用空间-1即是元素排序
+后存在的下标位置,然后自身计数-1,因为会有重复数据
+5.新建写回数组C, 长度与A一致, 把在B中排序完成集合写回C -->
+
+<body>
+    <script>
+        function countSort(A) {
+            let max = Math.max(...A)
+            let B = Array(max + 1).fill(0);
+            let C = Array(A.length - 1);
+
+            //计数
+            for (let i = 0; i < A.length; i++) {
+                B[A[i]]++
+            }
+            //累加
+            for (let i = 1; i < B.length; i++) {
+                B[i] += B[i - 1]
+            }
+            //反向遍历
+            for (let i = 0; i < A.length; i++) {
+                C[B[A[i]] - 1] = A[i];
+                B[A[i]]--;
+            }
+            return C
+        }
+
+        let a = countSort([6, 2, 2, 4, 3, 3, 5, 1]);
+        console.log(a)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>归并排序</title>
+</head>
+
+<body>
+    <script>
+
+        function Merge(a, b) {
+            var n = a && a.length;
+            var m = b && b.length;
+            var i = 0, j = 0;
+            var c = [];
+
+            while (i < n && j < m) {
+                if (a[i] < b[j]){ 
+                    c.push(a[i++])
+                }
+                else {
+                    c.push(b[j++])
+                }
+            }
+
+            while (i < n) {
+                c.push(a[i++])
+            }
+            while (j < m) {
+                c.push(b[j++])
+            }
+
+
+            return c;
+
+            
+        }
+
+        function mergeSort(arr) {
+
+            if (arr.length == 1) {
+                return arr;
+            }
+            var mid = Math.floor(arr.length / 2);
+            var left = arr.slice(0, mid)
+            var right = arr.slice(mid)
+            return Merge(mergeSort(left), mergeSort(right))
+        }
+
+        let a = mergeSort([6, 1, 4, 2, 3, 5]);
+        console.log(a)
+    </script>
+</body>
+
+</html>

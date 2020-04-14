@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Dialog</title>
+	</head>
+	<style>
+		.demo{
+            background-color: #6a0;
+            color: #fff;
+            padding: 6px 8px;
+            width: 150px;
+            border-radius: 8px;
+            position: relative;
+            margin: 20px auto;
+        }
+        .demo::before{
+            content: "";
+            position: absolute;
+            /* border-left: 10px solid #tr; */
+            border-right: 8px solid #6a0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            left: -8px;
+            top:8px;
+        }
+	</style>
+
+	<body>
+        <div class="demo">Hello world!</div>
+		
+	</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>插入排序</title>
+</head>
+
+<body>
+    <script>
+        function insertSort(arr) {
+            for(let i=1;i<arr.length-1;i++){
+                let tmp=arr[i];
+                let j=i-1;
+                while(j>=0&&arr[j]>tmp){
+                    arr[j+1]=arr[j]
+                    j--;
+                }
+                arr[j+1]=tmp
+            }
+            return arr;
+        }
+
+        let a = insertSort([6,1,4,2,3,5]);
+        console.log(a)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>五角星和六角形</title>
+</head>
+<style>
+    .fiveStar {
+        width: 0;
+        height: 0;
+        border-bottom: 50px solid red;
+        border-left: 70px solid transparent;
+        border-right: 70px solid transparent;
+        transform: rotate(35deg);
+        position: relative;
+        margin: 100px auto;
+    }
+    .fiveStar::after {
+        content: "";
+        position: absolute;
+        border-bottom: 50px solid red;
+        border-left: 70px solid transparent;
+        border-right: 70px solid transparent;
+        transform: rotate(-70deg);
+        top: 0px;
+        left: -70px;
+    }
+    .fiveStar::before {
+        content: "";
+        position: absolute;
+        border-bottom: 60px solid red;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        transform: rotate(-35deg);
+        top: -40px;
+        left: -45px;
+    }
+
+    .sixStar{
+        width: 0;
+        height: 0;
+        border-bottom: 70px solid red;
+        border-left: 45px solid transparent;
+        border-right: 45px solid transparent;
+        margin: 0 auto;
+        position: relative;
+    }
+    .sixStar::after{
+        content:"";
+        position:absolute;
+        border-top: 70px solid red;
+        border-left: 45px solid transparent;
+        border-right: 45px solid transparent;
+        left:-45px;
+        top:25px
+    }
+</style>
+
+<body>
+    <div class="fiveStar"></div>
+
+    <div class="sixStar"></div>
+</body>
+
+</html>
