@@ -5,28 +5,31 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<style>
-		.demo{
+		.demo {
 			width: 100px;
 			height: 100px;
 			background-color: salmon;
 			position: absolute;
-			top:0;
+			top: 0;
 			left: 0;
 			animation: move 5s infinite ease-in-out;
 		}
+
 		@keyframes move {
-			25%{
-              top:0;
-			  left: 80%;
-			  background-color: yellow;
+			25% {
+				top: 0;
+				left: 80%;
+				background-color: yellow;
 			}
-			50%{
-				top:80%;
+
+			50% {
+				top: 80%;
 				left: 80%;
 				background-color: green;
 			}
-			75%{
-				top:80%;
+
+			75% {
+				top: 80%;
 				left: 0;
 				background-color: rgb(21, 83, 218);
 			}
@@ -37,24 +40,26 @@
 <body>
 	<!-- <div class="demo"></div> -->
 	<script>
-		function fun(n,o){
-			console.log(o);
-			return {
-				fun:function(m){
-					return fun(m,n);
-				}
-			};
+
+
+
+		var detailTime = function (date) {
+			const date = new Date(time);
+			const year = date.getFullYear()
+			const month = date.getMonth() + 1
+			const day = date.getDate()
+			const hour = date.getHours()
+			const minute = date.getMinutes()
+			const second = date.getSeconds()
+
+			return [year, month, day].map(formatNumber).join('.')
 		}
-		var a=fun(0);  //undefined
-		a.fun(1);      //0
-		a.fun(2);      //0  
-		a.fun(3);      //0
 
-		var b=fun(0).fun(1).fun(2).fun(3); //undefined 0 1 2
-
-		var c=fun(0).fun(1);//undefined 0
-		c.fun(2);//1
-		c.fun(3);//1
+		var formatNumber = function (n) {
+			n = n.toString()
+			return n[1] ? n : '0' + n
+		}
+		console.log(detailTime(1590854400000))
 	</script>
 </body>
 
