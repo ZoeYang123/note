@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>五边星和六边星</title>
+</head>
+<style>
+    .five{
+        width: 50px;
+        height: 0;
+        border-left: 35px solid transparent;
+        border-right: 35px solid transparent;
+        border-top: 50px solid red;
+        margin: 200px auto;
+        position:relative;
+    }
+    .five::before{
+        content:"";
+        border-left: 60px solid transparent;
+        border-right: 60px solid transparent;
+        border-bottom: 40px solid red;
+        position:absolute;
+        top:-90px;
+        left:-35px;
+    }
+
+    .six{
+        width: 50px;
+        height: 0;
+        border-left: 35px solid transparent;
+        border-right: 35px solid transparent;
+        border-top: 50px solid red;
+        margin: 200px auto;
+        position:relative;
+    }
+    .six::before{
+        content:"";
+        width: 50px;
+        height: 0;
+        border-left: 35px solid transparent;
+        border-right: 35px solid transparent;
+        border-bottom: 50px solid red;
+        position: absolute;
+        top:-100px;
+        left:-35px;
+    }
+</style>
+
+<body>
+    <div class="five"></div>
+
+    <div class="six"></div>
+</body>
+
+</html>

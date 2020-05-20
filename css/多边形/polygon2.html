@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>心形和蛋形</title>
+</head>
+<style>
+    .love{
+        width: 200px;
+        height: 200px;
+        margin: 100px auto;
+        position: relative;
+    }
+    .love::before{
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        background-color: red;
+        border-radius: 50px 50px 0 0;
+        transform: rotate(-45deg);
+        /* transform-origin: 0 100%;
+        left:100px; */
+    }
+    .love::after{
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 150px;
+        background-color: red;
+        border-radius: 50px 50px 0 0;
+        transform: rotate(45deg);
+        /* transform-origin:  0 100%; */
+        /* top:-50px; */
+        left:35px;
+    }
+
+    .egg{
+        margin: 0 auto;
+        width: 150px;
+        height: 200px;
+        background-color: salmon;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+</style>
+
+<body>
+    <div class="love"></div>
+
+    <div class="egg"></div>
+</body>
+
+</html>

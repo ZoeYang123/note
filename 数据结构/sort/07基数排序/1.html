@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>基数排序</title>
+</head>
+
+<body>
+    <script>
+        function radixSort(A) {
+            const max=Math.max(...A);
+            const buckets=Array.from({length:10},()=>[]);
+
+            let m=1;
+            while(m<max){
+                //对比基数
+                A.forEach(number=>{
+                    const digit=~~((number%(m*10))/m); //~~的作用是去掉小数部分
+                    buckets[digit].push(number);
+                })
+                let j=0;
+                buckets.forEach(buckets=>{
+                    while(buckets.length>0){
+                        A[j++]=buckets.shift()
+                    }
+                })
+                m=m*10;
+            }
+            return A;
+        }
+
+        let a = radixSort([27,91,1,97,17,23]);
+        console.log(a)
+        console.log(1%100)
+    </script>
+</body>
+
+</html>
