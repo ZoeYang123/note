@@ -1,46 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
-	<script type="text/javascript">
-		document.write('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"] + ",浏览器版本:" + getBrowserInfo());
-
-		function getBrowserInfo() {
-			var agent = navigator.userAgent.toLowerCase();
-
-			var regStr_ie = /msie [\d.]+;/gi;
-			var regStr_ff = /firefox\/[\d.]+/gi
-			var regStr_chrome = /chrome\/[\d.]+/gi;
-			var regStr_saf = /safari\/[\d.]+/gi;
-
-			//IE
-			if (agent.indexOf("msie") > 0) {
-				return agent.match(regStr_ie);
-			}
-
-			//firefox
-			if (agent.indexOf("firefox") > 0) {
-				return agent.match(regStr_ff);
-			}
-
-			//Chrome
-			if (agent.indexOf("chrome") > 0) {
-				return agent.match(regStr_chrome);
-			}
-
-			//Safari
-			if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
-				return agent.match(regStr_saf);
-			}
-
-		}
-	</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script>
+	function uploadImg(){
+		debugger
+		alert(1)
+	}
+</script>
 </head>
-
 <body>
+	 <button type="button" onclick="uploadImg()">上传</button>
+	 <input type="button" οnclick="uploadImg()" value="上传">
 </body>
-
 </html>

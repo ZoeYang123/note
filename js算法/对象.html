@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+<body>
+    <script>
+        //1.对象就是一组“键值对”（key-value）的集合，是一种无序的符合数据集合
+        //2.如果不同的变量名指向同一个对象，那么它们都是这个对象的引用，也就是说指向同一个
+        //内存地址，修改其中一个变量，会影响到其它所有变量
+        //3.数值键名不能使用点运算符（因为会被当成小数点),只能使用方括号运算。
+        //4.查看一个对象本身的所有属性，可以使用Object.keys方法
+        //5.for...in循环用来遍历一个对象的全部属性
+        //6.objext.hasOwnProperty(key),判断某个对象有某个属性
+
+        var obj={
+            key1:1,
+            key2:2
+        };
+        console.log(Object.keys(obj))
+    </script>
+    
+</body>
+</html>

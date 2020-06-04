@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 声明函数的三种方法
+         * 1.function 命令
+         * 2.函数表达式
+         * 3.Function构造函数
+         *
+         **/
+        /**
+         * javascript引擎将函数名视同名变量名，所以采用function命令声明的函数时，整个函数会像变量声明
+         * 一样，被提升到代码头部
+         * 不能在条件语句中声明函数（function命了）
+         **/
+
+        /**
+         * name属性：返回函数的名字，
+         * function f1() {}
+         * f1.name // "f1"
+         * 
+         * lenght属性：返回函数预期传入的参数个数，即函数定义之中的参数个数
+         * function f(a, b) {}
+         * f.length // 2
+         **/
+
+        /**
+         * 传递方式
+         * 函数参数如果是原始类型的值（数值、字符串、布尔值），传递方式是
+         * 传值传递，在函数体内修改参数值，不会影响到函数外部。
+         * 函数参数是复合类型的值（数组、对象、其它函数），传递方式是
+         * 传址传递，也就是传入函数的原始值是地址，在函数内部修改参数，将会
+         * 影响到原始值,
+         * 函数内部修改的，不是参数对象的某个属性，而是替换掉整个参数，
+         * 这时不会影响到原始值。
+         * var obj = [1, 2, 3];
+         * function f(o) {
+         *    o = [2, 3, 4];
+         * }
+         * f(obj);
+         *  obj // [1, 2, 3]
+         **/
+
+        /**
+         * argument对象
+         * 由于javascript允许函数有不定数目的参数，所以需要一种机制，
+         * 可以在函数内部读取所以参数。
+         * 严格模式下，arguments对象是一个只读对象，修改它是无效的，但不会报错。
+         * arguments对象带有一个callee属性，返回它所对应的原函数
+         **/
+        var f = function () {
+            console.log(arguments.callee);
+        }
+
+        f()
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>loading</title>
+	</head>
+	<style>
+        .demo{
+            margin: 50px auto;
+            display: flex;
+        }
+		.demo>div{
+            width: 4px;
+            height: 40px;
+            background-color: rgb(57, 238, 178);
+            margin: 0 3px;
+            animation: action 1s infinite ease-in-out;
+        }
+        .demo>div:nth-child(2){
+            animation-delay: -0.9s;
+        }
+        .demo>div:nth-child(3){
+            animation-delay: -0.8s;
+        }
+        .demo>div:nth-child(4){
+            animation-delay: -0.7s;
+        }
+
+        @keyframes action {
+            0%,40%,100%{transform: scaleY(0.4);}
+            20%{transform: scaleY(1);}
+        }
+	</style>
+
+	<body>
+        <div class="demo">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+		
+	</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组</title>
+</head>
+
+<body>
+    <script>
+        //任何类型的数据，都可以放入数组，如下
+        var arr = [
+            { a: 1 },
+            [1, 2, 3],
+            function () { return true }
+        ];
+
+        //本质上，数组属于一种特殊的对象
+        //对象有两种读取成员的方法，点结构和方括号结构，但是对于数值的键名，不能使用点结构
+        //当length属性设为大于数组个数时，读取新增的位置都会返回undefined
+        var a = ['a'];
+        a.length = 3;
+        a[1];//undefined
+
+        //数组的本质是一种对象，所以为数组添加属性，这不影响length属性的值。数组的键
+        //分别设为字符串和小数，结果都不影响length属性，length的值就是等于最大的数字键加1，
+        //而这个数组没有整数键，length属性保持为0
+        var a = [];
+        a['p'] = 'abc';
+        a.length //0
+
+        a[2.1] = 'abc';
+        a.length //0
+
+        //数组的某个位置是空位，与某个位置是undefined，是不一样的。如果是空位，使用forEach方法、
+        //for...in结构、以及Object.keys方法进行遍历，空位都会被跳过。
+        
+        /*类似数组的对象
+        **如果一个对象的所有键名都是正整数或零，并且有length属性，那么这个对象就很像数组
+        **，语法上称为“类似数组的对象”(arr-like in结构、以及Object)。
+        **“类似数组的对象”的根本特征，就是具有length属性，只要有length属性，就可以认为这个
+        **对象类似于数组。这种length属性不是动态值，不会随着成员的变化而变化。
+        **var arr = Array.prototype.slice.call(arrayLike);--将“类似数组的对象”变成真正的数组
+        **Array.prototype.forEach.call()（这种方法比直接使用数组原生的forEach要慢）
+        */
+    </script>
+
+</body>
+
+</html>
