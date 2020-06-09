@@ -55,13 +55,40 @@
          * 可以在函数内部读取所以参数。
          * 严格模式下，arguments对象是一个只读对象，修改它是无效的，但不会报错。
          * arguments对象带有一个callee属性，返回它所对应的原函数
+         * arguments.callee
          **/
-        var f = function () {
-            console.log(arguments.callee);
-        }
 
-        f()
+        /**
+        * 闭包(定义在函数内部的函数)
+        * 闭包最大的用处有两个，一个是读取函数内部的变量，另一个就是让这些变量始终保持在内存中，
+        * 
+        **/
 
+        /**
+        * 立即调用的函数表达式（IIFE）
+        * (function(){}()); 或者 (function(){})();
+        **/
+
+       function createIn(start){
+           return function(){
+               return start++;
+           }
+       }
+
+       /**
+       * eval命令（将字符串当执行）
+       * eval('return') 会报错
+       * eval没有自己的作用域，都在当前作用域内执行，修改当前作用域的变量的值，会造成安全问题
+       * 在严格模式下，eval内部声明的变量，不会影响到外部
+       * 即使在严格模式下，eval依然可以读写当前作用域的变量
+       **/
+
+       (function(){
+          'use strict';
+          var foo=1;
+          eval('foo=123');
+          console.log(foo)
+       }())
     </script>
 </body>
 

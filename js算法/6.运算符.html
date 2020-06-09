@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运算符</title>
+</head>
+<body>
+    <script>
+        /**
+         * 如果一个运算子是字符串，另一个运算子是非字符串，这时非字符串会转成字符串，再
+         * 连接在一起（加法运算）
+         * 减法、除法、乘法运算符都是将字符串自动转为数值，然后在运算
+         **/
+
+        /**
+         * 指数运算符(**)
+         * 前一个运算子是底数，后一个运算子是指数
+         * 2**4 //16
+         **/
+
+        /**
+         * 任何值（包括NaN本身）与NaN比较，返回的都是false
+         **/
+       
+        /**
+         * 运算子是对象，会转为原始类型的值，再进行比较。
+         * 对象转换成原始类型的值，算法是先调用valueOf方法；
+         * 如果返回的还是对象，再接着调用toString方法
+         * {x:2}>={x:1} //true
+         * 等同于 {x: 2}.valueOf().toString() >= {x: 1}.valueOf().toString()
+         * 即 '[object Object]' >= '[object Object]'
+         **/
+        
+         /**
+          * 两个复合类型值（对象、数组、函数）的数据做比较时，比较的是地址
+          * undefined === undefined // true
+          * null === null // true
+          * undefined 和 null与其他类型的值比较时，结果都为false，他们相互比较时为true
+          **/
+         
+    </script>
+</body>
+</html>
