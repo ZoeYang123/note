@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+	<table id="contain">
+		<tr>
+			<td>
+				<select name="" id="" class="sele" id="sele1">
+					<option class="opt" value="1">1</option>
+					<option class="opt" value="2">2</option>
+					<option class="opt" value="3">3</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<button class="add">增加一二级目录</button>
+	</body>
+	</html>
+	<script>
+		$('.sele').change(function(){
+			$(this).nextAll().remove();
+			html = '';
+			html += '<select class="seles">';
+			html += '<option class="opt" value="1">1</option>';
+			html += '<option class="opt" value="2">2</option>';
+			html += '<option class="opt" value="3">3</option>';
+			html += '</select>';
+			$(this).after(html);
+		});
+		$('.add').click(function(){
+			html ='<tr><td>';
+			html += '<select class="sele">';
+			html += '<option class="opt" value="1">1</option>';
+			html += '<option class="opt" value="2">2</option>';
+			html += '<option class="opt" value="3">3</option>';
+			html += '</select>';
+			html += '</td></tr>';
+			$('#contain').append(html);
+			$('.sele').change(function(){
+				$(this).nextAll().remove();
+				html = '';
+				html += '<select class="seles">';
+				html += '<option class="opt" value="1">1</option>';
+				html += '<option class="opt" value="2">2</option>';
+				html += '<option class="opt" value="3">3</option>';
+				html += '</select>';
+				$(this).after(html);
+			});
+		})
+	</script>
+
+
+</body>
+</html>

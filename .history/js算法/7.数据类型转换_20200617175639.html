@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型转换</title>
+</head>
+<body>
+    <script>
+        /**
+         * Number()
+         * 1.原始数据类型（基本数据类型）
+         * Number(undefined); //NaN
+         * Number(null); //0
+         * Number('324abc'); //NaN
+         * Number比parseInt函数严格，只要有一个字符无法转成数值，整个字符串会被转为NaN
+         * 2.对象
+         * Number方法参数是对象时，返回NaN，除非是包含单个数值的数组
+         * Number({a:1});  //NaN
+         * Number([1,2,3]); //NaN
+         * Number([5]); //5
+         * 1)调用对象自身的valueOf()方法，如果返回原始类型的值，
+         * 则直接对该值使用Number函数，不在进行后续步骤
+         * 2)如果valueOf方法返回的还是对象，则改为调用对象自身的toString()
+         * 方法。如果toString方法返回原始类型的值，则对该值使用Number函数，不在
+         * 进行后续步骤
+         * 3)如果toString方法返回的是对象，就报错
+         **/
+
+         var obj={x:1};
+         Number(obj);//NaN
+
+         //等同于
+         if(typeof obj.valueOf()==='object'){
+             Number(obj.toString());
+         }else{
+             Number(obj.valueOf());
+         }
+
+    </script>
+</body>
+</html>

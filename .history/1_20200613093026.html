@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    * {margin: 0;padding: 0;}
+    ul {list-style: none;}
+    /* 清除所有ul的小圆点 */
+    
+    .banner {
+        margin: 50px auto; width: 333px; height: 30px;
+        background: url("images/bg.jpg") no-repeat;
+    }
+    .banner li {
+        background: url("images/libg.jpg") no-repeat;
+    }
+    /* 给所有li添加背景图片 */
+    .banner>ul>li {
+        float: left;margin:0 5px;position: relative;
+    }
+    /* div下的ul的li设置样式 */
+    a {
+        display: block;width: 100px;height: 30px;
+        text-decoration: none;color: black;
+        line-height: 30px;text-align: center;
+    }
+    /* 去掉a的下划线，设置样式 */
+    .second {
+        position: absolute;top: 30px;display: none;
+    /* top: 30px; 因为一级菜单高度30px，top为0就会遮住一级菜单 */
+    }
+    .second li {
+        padding: 5px 13px;
+    }
+    </style>
+</head>
+<body>
+    
+    <div class="banner">
+        <ul>
+            <li>
+                <a href="">一级菜单1</a>
+                    <ul class="second">
+                    <li>二级菜单1</li>
+                    <li>二级菜单1</li>
+                    <li>二级菜单1</li>
+                    </ul>
+               
+            </li>
+
+            <li>
+                <a href="">一级菜单2</a>
+                    <ul class="second">
+                    <li>二级菜单2</li>
+                    <li>二级菜单2</li>
+                    <li>二级菜单2</li>
+                    </ul>
+              
+            </li>
+
+        <li>
+                <a href="">一级菜单3</a>
+                    <ul  class="second">
+                    <li>二级菜单3</li>
+                    <li>二级菜单3</li>
+                    <li>二级菜单3</li>
+                    </ul>
+                
+            </li>
+        </ul>
+
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+    $(function(){
+        $(".banner>ul>li").mouseenter(function(){
+            $(this).find("ul").css("display","block");
+        });
+        // 给div下的一级菜单li注册事件，鼠标进入显示该li下的二级菜单的ul
+        $(".banner>ul>li").mouseleave(function(){
+            $(this).find("ul").css("display","none");
+        });
+        // 给div下的一级菜单li注册事件，鼠标离开隐藏该li下的二级菜单的ul
+
+    });
+    </script>
+</body>
+</html>
