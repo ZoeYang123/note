@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object对象</title>
+</head>
+<body>
+    <script>
+      /**
+      * Javascript的所有其他对象都继承自Object对象，即那些对象都是Object的实例
+      * Object对象的原生方法分成两类：Object本身的方法（直接定义在Object对象的方法）与
+      * Object的实例方法（定义在Object原型对象Object.prototype上的方法）
+      **/
+
+      /**
+      * instanceof运算符用来验证，一个对象是否为指定的构造函数的实例，
+      * 如果参数是原始类型的值，Object方法将其转为对应的包装对象的实例
+      **/
+      var obj = Object(1);
+      obj instanceof Object; //true
+      console.log(obj instanceof Number); //true
+
+      var obj = Object('foo');
+      obj instanceof Object; //tue
+      console.log(obj instanceof String); //true
+
+      var obj = Object(true);
+      obj instanceof Object; //true
+      console.log(obj instanceof Boolean); //true
+
+      /**
+      * 如果Object方法的参数是一个对象，它总是返回该对象，即不用转换
+      **/
+      var arr = [];
+      var obj =Object(arr);//返回原数组
+      obj === arr; //true
+
+      var value = {};
+      var obj = Object(value);//返回原对象
+      obj === value; //true
+
+      var fn = function () {};
+      var obj = Object(fn);//返回原函数
+      obj === fn; //true
+
+      var obj =new Object(123);
+      console.log(obj);
+      var obj2 = Object(456);
+      console.log(obj2)
+    </script>
+</body>
+</html>
