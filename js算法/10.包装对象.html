@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>包装对象</title>
+</head>
+
+<body>
+    <script>
+        /**
+        * 三种原始类型的值--数值、字符串、布尔值，在一定条件下，会自动转为对象，也就是原始类型的
+        * '包装对象'。
+        * 如：var v = new Number(123); 
+        *     typeof v; //"object"
+        *     v1 === 123;//false
+        * 所谓'包装对象',就是分别与数值、字符串、布尔值相对应的Number、String、Boolean三个原生
+        * 对象。这三个原生对象可以把原始类型的值变成（包装成）对象。
+        * Number、String、Boolean如果不作为构造函数调用（即调用时不加new），常常用于
+        * 将任意类型的值转为数值、字符串和布尔值
+        **/
+
+        /**
+         * 实例方法
+         * -valueOf(),返回包装对象实例对应的原始类型的值
+         * -toString(),返回对应字符串形式
+        **/
+        console.log(new Number(123).valueOf() === 123);//true
+        new Number(123).toString();//"123"
+
+        /**
+         * 原始类型与实例对象的自动转换
+         * 原始类型的值，可以自动当作包装对象调用，即调用各种对象的属性和方法，Javascript引擎会自动
+         * 将原始类型的值转为包装对象实例，使用后立刻销毁实例
+        **/
+        var str = 'abc';
+        str.length;//3
+        //等同于
+        var strObj = new String(str);
+        /*String{
+            0:'a',1:'b',2:'c',lenght:3,[[PrimitiveValue]]: "abc"
+        }*/
+        strObj.length;//3
+
+        /**
+        * 自动转换成生成的包装对象是只读，无法修改，所以无法添加属性
+        **/
+        var s = 'Hello World';
+        s.x = 123;
+        s.x // undefined
+        var sObj = new String('Hello World');
+        sObj.x = 123;
+        console.log(sObj.x);//123
+        console.log(sObj)
+        if(new Boolean(false)){
+            console.log('true')
+        }//'true'
+    </script>
+
+</body>
+
+</html>
