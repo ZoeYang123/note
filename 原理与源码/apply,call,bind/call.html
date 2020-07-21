@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.myCall = function (content) {
+            //1.判断是否是函数
+            if (typeof this !== "function") {
+                throw new TypeError("Error");
+            }
+
+            //2.content是否为空，空则设置为window
+            content = content || window;
+            //3.获取参数列表
+            let result = null,
+                args = [...arguments].slice(1);
+            //4.将调用函数设为对象的方法
+            content.fn = this;
+            //5.调用函数
+            result = content.fn(...args);
+            //6.将属性删除
+            delete content.fn;
+            return result
+        }
+        var arr1 = [1, 2, 3];
+        arr1.push.myCall(arr1);
+        console.log(arr1);
+
+        console.log(Object.toString());//"function Object() { [native code] }"
+        console.log(Object.prototype.toString());//"[object Object]"
+
+    </script>
+</body>
+
+</html>
