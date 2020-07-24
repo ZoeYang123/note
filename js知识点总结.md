@@ -253,6 +253,9 @@ Function.prototype.myBind = function (content) {
 
 当事件发生在DOM元素上时，该事件并不完全发生在那个元素上。在冒泡阶段，事件冒泡，或者事件发生在它的父代，祖父母，祖父母的父代，直到到达window为止。
 
+- 阻止事件冒泡：e.stopPropagation()
+- 阻止默认行为：e.preventDefalut()
+
 ##### 16.Ajax
 
 ##### 17.js单线程
@@ -309,4 +312,8 @@ javascript语言的一大特点就是单线程
 ##### 30.js实现instanceof
 
 ##### 31.构造函数实现原理
+
+##### 32.for in和for of区别
+
+##### 33.前端登录实现过程
 
