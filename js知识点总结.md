@@ -265,6 +265,24 @@ ldh.__proto__===Star.prototype;   //true
 
 对象原型（______proto__）和构造函数（prototype）原型对象里面都有一个constructor属性，constructor我们称为构造函数，因为它指回构造函数本身。
 
+```
+Star.prototype = {
+   constructor:Star,
+   sing:function(){},
+   movie:functon(){}
+}
+```
+
+> 构造函数、实例、原型对象三者之间的关系
+
+![1595865469106](D:\web\Project\note\image\1595865469106.png)
+
+
+
+> 原型链
+
+![1595865573188](D:\web\Project\note\image\1595865573188.png)
+
 ##### 13.闭包
 
 > **闭包是指有权访问另一个函数作用域内变量的函数**，创建闭包最常见的方式就是在一个函数内创建另一个函数，创建的函数可以访问到当前函数的局部变量
