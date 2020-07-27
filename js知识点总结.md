@@ -243,7 +243,27 @@ Function.prototype.myBind = function (content) {
 - 静态成员：在构造函数上添加的成员，只能由构造函数本身来访问
 - 实例成员：在构造函数内部（this）创建，只能由实例化对象来访问
 
+> 原型
 
+构造函数通过原型分配的函数是所有对象所**共享**的。<u>每一个构造函数都有一个prototype属性，指向另一个对象。</u>
+
+<u>这个prototype就是一个对象，这个对象的所有属性和方法，都会被构造函数所拥有</u>。
+
+> 对象原型 ______proto__
+
+对象都会有一个属性______proto__ 指向构造函数的prototype原型对象。______proto__对象原型和原型对象prototype是等价的
+
+```javascript
+function Star(){
+    
+}
+var ldh = new Star();
+ldh.__proto__===Star.prototype;   //true
+```
+
+> constructor 构造函数
+
+对象原型（______proto__）和构造函数（prototype）原型对象里面都有一个constructor属性，constructor我们称为构造函数，因为它指回构造函数本身。
 
 ##### 13.闭包
 
