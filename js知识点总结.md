@@ -263,13 +263,68 @@ person.sayName(); //“Yang"
 
 > 6.寄生构造函数模式
 
+```javascript
+function Person(name, age, job){
+    var o = new Object();
+    o.name = name;
+    o.age = age;
+    o.job = job;
+    o.sayName = function(){
+        console.log(this.name);
+    };
+    return o;
+}
+var person = new Person("Yang",18,"前端工程师");
+person.sayName();//"Yang"
+person instanceof Person;//false
+```
+
+除了用new操作符并把使用的包装函数叫做构造函数之外，这个模式跟工厂模式其实是一模一样。构造函数在不返回值的情况下，默认会返回新对象实例。而通过构造函数的末尾添加一个return语句，可以重写调用构造函数的返回的值。
+
+关于寄生构造函数模式，有一点需要说明：首先，返回的对象与构造函数或者与构造函数的原型属性之间没有关系；构造函数返回的对象与构造函数外部创建的对象没有什么不同。所以不能依赖instanceof操作符来确定对象类型。
+
 
 
 > 7.稳妥构造函数模式
 
+```javascript
+function Person(name, age, job){
+    var o = new Object();
+    o.sayName = function(){
+        console.log(name);
+    }
+    return o;
+}
+var person = new Person("Yang",18,"前端工程师");
+person.sayName();//"Yang"
+person instanceof Person; //false
+```
 
+变量person中保存的是一个稳妥对象，而除了调用sayName()方法外，没有别的方式可以访问其他数据成员。即使有其他代码会给这个对象添加方法或数据成员，但也不可能有别的办法访问传入到构造函数中的原始数据。稳妥构造函数模式提供的这种安全性，使得它非常适合在某些安全执行环境。
 
 ##### 9.继承的几种实现方式
+
+> 类式继承
+
+
+
+> 借用构造函数
+
+
+
+> 组合继承
+
+
+
+> 原型式继承
+
+
+
+> 寄生式继承
+
+
+
+> 寄生式组合继承
 
 ##### 10.寄生式组合继承的实现
 
