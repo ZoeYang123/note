@@ -127,7 +127,147 @@ toString.call(null); // [object Null]
 
 ##### 7.作用域和作用域链
 
-##### 8.创建对象的几种方式
+
+
+##### 8.创建对象的7种方式
+
+> 1.工厂模式
+
+```javascript
+function person(name, age, job){
+    var p = new Object();
+    p.name = name;
+    p.age = age;
+    p.job = job;
+    p.sayName = function(){
+        console.log(this.name);
+    }
+    return p;
+}
+
+var person1 = person("Yang", 18, "前端工程师");
+var person2 = person("Wen", 20, "会计");
+person1 instanceof person; //false
+person1.constructor === person; //false
+```
+
+函数person()能够根据接受的参数来构建一个包含所有必要信息的person对象。可以无数次的调用这个函数，而每次返回一个包含三个属性一个方法的对象。工厂模式虽然解决了创建多个相似对象的问题，但却**没有解决对象识别**的问题（即怎样知道一个对象的类型）。
+
+
+
+> 2.构造函数模式
+
+```javascript
+function Person(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.sayName = function(){
+        console.log(this.name);
+    }
+}
+
+var p1 = new Person("Yang", 18, "前端工程师");
+var p2 = new Person("Wen", 20, "会计");
+p1.constructor === Person;//true
+p1 instanceOf Person;//trus
+/**
+ *没有显示的创建对象
+ *直接将属性和方法赋给了this对象
+ *没有return语句
+ */
+```
+
+创建Person的实例，必须使用new操作符。调用构造函数会经历一下四个步骤：
+
+- 创建一个新对象
+- 将构造函数中的作用域赋给新对象（this指向新对象）
+- 执行构造函数中的代码（为这个对象添加属性）
+- 返回新对象
+
+**构造函数的问题**
+
+使用每个方法都要在实例上重新创建一遍，p1和p2都有一个sayName()的方法，但这两个方法不是同一个Function的实例。
+
+
+
+> 3.原型模式
+
+```javascript
+function Person(){
+}
+Person.prototype.name = "Yang";
+Person.prototype.age = 18;
+Person.prototype.job = "前端工程师";
+Person.prototype.sayName = function(){
+    console.log(this.name);
+}
+var person1 = new Person();
+person1.sayName();//"Yang"
+var person2 = new Person();
+person2.sayName();//"Yang"
+person1.sayName === Person2.sayName; //true
+```
+
+sayName()方法和所有属性直接添加到了Person的prototype属性中，构造函数成了空函数。通过构造函数来创建实例对象，具有相同的属性和方法。与构造函数模式的不同的是，新对象的这些属性和方法是由所有实例所共享。
+
+> 4.组合使用构造函数模式和原型模式
+
+```javascript
+function Person(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.friends = ["Zoe","Lily"];
+}
+Person.prototype = {
+    constructor:Person,
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+
+var person1 = new Person("Yang", 18, "前端工程师");
+var person2 = new Person("Wen", 20, "会计");
+
+person1.friends === person2.friends;  //false
+person1.sayName === person2.sayName;  //true
+```
+
+实例属性都是在构造函数中定义，而由所有实例共享的属性constructor和方法sayName()则是在原型中定义。
+
+
+
+> 5.动态原型模式
+
+```javascript
+function Person(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    
+    if(typeof this.sayName != "function"){
+        //只会在初次调用构造函数时才会执行
+        Person.prototype.sayName = function(){
+            console.log(this.name)
+        }
+    }
+}
+
+var person = new Person("Yang",18,"前端工程师");
+person.sayName(); //“Yang"
+```
+
+在sayName()方法不存在的情况下，才会将它添加到原型中。在初次调用构造函数的时候就完成原型对象的修改
+
+
+
+> 6.寄生构造函数模式
+
+
+
+> 7.稳妥构造函数模式
+
+
 
 ##### 9.继承的几种实现方式
 
