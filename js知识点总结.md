@@ -310,13 +310,73 @@ person instanceof Person; //false
 
 > 借用构造函数
 
+```javascript
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+    this.sayName = function(){
+        console.log(this.name);
+    }
+    Person.prototype.getAge = function(){
+		console.log(this.age)
+	}
+}
+
+function Student(name, age, score){
+    Person.call(this, name, age);
+    this.score = score;
+}
+var student = new Student("Yang", 18, 90);
+student.name; //"Yang"
+student.sayName(); //"Yang"
+student.getAge(); //TypeError: student.getAge is not a function
+```
+
+在Person原型中定义的方法，对于Student是不可见的。构造函数式继承并没有继承父类原型上的方法。
+
 
 
 > 组合继承
 
+```javascript
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+    Person.prototype.getAge = function(){
+		console.log(this.age)
+	}
+}
+function Student(name, age, score){
+    Person.call(this, name, age);
+    this.score = score;
+}
+Student.prototype = new Person();
+var student = new Student("Yang", 18, 90);
+student.getAge(); //18
+```
+
+组合继承避免了原型链和借用构造函数的缺陷，但是，父类的构造函数被调用了两次。
+
 
 
 > 原型式继承
+
+```javascript
+function object(o){
+    function F(){}
+    F.prototype = 0;
+    return new F();
+}
+var person = {
+    name:"Yang",
+    frends:["Wen","Lily"]
+}
+var p = object(person);
+p.name;//"Yang"
+p.friends.push("Bob");
+p.friends;//["Wen", "Lily", "Bob"]
+
+```
 
 
 
