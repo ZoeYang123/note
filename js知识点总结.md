@@ -378,9 +378,25 @@ p.friends;//["Wen", "Lily", "Bob"]
 
 ```
 
-
+与Object.create()类似
 
 > 寄生式继承
+
+```javascript
+function createAnother(o){
+    var clone = Object.create(o);
+    clone.sayHi = function(){
+        console.log('hi');
+    }
+    return clone;
+}
+var person = {
+    name:"Yang",
+    frends:["Wen","Lily"]
+}
+var anotherPerson = createAnother(person);
+anotherPerson.sayHi();//"hi"
+```
 
 
 
