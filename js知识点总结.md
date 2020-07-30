@@ -351,11 +351,12 @@ function Student(name, age, score){
     this.score = score;
 }
 Student.prototype = new Person();
+Student.prototype.constructor = Student;
 var student = new Student("Yang", 18, 90);
 student.getAge(); //18
 ```
 
-组合继承避免了原型链和借用构造函数的缺陷，但是，父类的构造函数被调用了两次。
+组合继承避免了原型链和借用构造函数的缺陷，但是，父类的构造函数被调用了两次，一次是在创建Student原型的时候，另一次是是在Student构造函数内部。
 
 
 
@@ -392,17 +393,54 @@ function createAnother(o){
 }
 var person = {
     name:"Yang",
-    frends:["Wen","Lily"]
+    friends:["Wen","Lily"]
 }
 var anotherPerson = createAnother(person);
 anotherPerson.sayHi();//"hi"
+anotherPerson.friends.push("Bob");
+person;//{name:"Yang",friends:["Wen","Lily","Bob"]}
 ```
 
+使用寄生式继承为对象添加函数，会由于不能做到函数复用而降低效率，这一点与构造函数模式类似。
 
 
-> 寄生式组合继承
 
-##### 10.寄生式组合继承的实现
+> 寄生组合式继承
+
+```javascript
+function inheritPrototype(subType,superType){
+    var prototype = Object.create(superType.prototype);  //创建对象,继承父类原型
+    prototype.constructor = subType;                //增强对象，重写被污染的子类constructor
+    subType.prototype = prototype;                  //指定对象，重写子类原型
+}
+//父类
+function SuperType(name){
+    this.name = name;
+    this.colors = ["red", "blue", "green"];
+}
+
+SuperType.prototype.sayName = function(){
+    console.log(this.name);
+}
+//子类
+function SubType(name, age){
+    SuperType.call(this,name);
+    this.age = age;
+}
+//实现原型上的方法
+inheritPrototype(SubType,SuperType);
+
+SubType.prototype.sayAge = function(){
+    console.log(this.age);
+}
+var subType = new SubType("Yang",18);
+subType; //{age: 18, colors: ["red", "blue", "green"], name:"Yang"}
+
+```
+
+这个例子的高效率体现在它只调用了一次SuperType构造函数，因此避免了在SubType.prototype上面创建的不必要、多余的属性。原型链还能保持不变，开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式。
+
+
 
 ##### 11.this、call、apply、bind的理解
 
@@ -582,7 +620,97 @@ Star.prototype = {
 
 javascript语言的一大特点就是单线程
 
+
+
 ##### 18.var、let、const区别
+
+- var声明的变量会挂载在window上，而let和const声明的变量不会
+
+```javascript
+var a = 100;
+console.log(a,window.a);    // 100 100
+
+let b = 10;
+console.log(b,window.b);    // 10 undefined
+
+const c = 1;
+console.log(c,window.c);    // 1 undefined
+```
+
+- var声明的变量存在变量提升，let和const不存在变量提升
+
+```javascript
+console.log(a); // undefined  ===>  a已声明还没赋值，默认得到undefined值
+var a = 100;
+
+console.log(b); // 报错：b is not defined  ===> 找不到b这个变量
+let b = 10;
+
+console.log(c); // 报错：c is not defined  ===> 找不到c这个变量
+const c = 10;
+```
+
+- let和const声明形成块作用域
+
+```javascript
+if(1){
+  var a = 100;
+  let b = 10;
+}
+
+console.log(a); // 100
+console.log(b)  // 报错：b is not defined  ===> 找不到b这个变量
+
+-------------------------------------------------------------
+
+if(1){
+  var a = 100;
+  const c = 1;
+}
+console.log(a); // 100
+console.log(c)  // 报错：c is not defined  ===> 找不到c这个变量
+```
+
+- 同一作用域下let和const不能声明同名变量，而var可以
+
+- 暂存死区
+
+```javascript
+var a = 100;
+
+if(1){
+    a = 10;
+    //在当前块作用域中存在a使用let/const声明的情况下，给a赋值10时，只会在当前作用域找变量a，
+    // 而这时，还未到声明时候，所以控制台Error:a is not defined
+    let a = 1;
+}
+```
+
+- const
+
+```javascript
+/*
+* 　　1、一旦声明必须赋值,不能使用null占位。
+*
+* 　　2、声明后不能再修改
+*
+* 　　3、如果声明的是复合类型数据，可以修改其属性
+*
+* */
+
+const a = 100; 
+
+const list = [];
+list[0] = 10;
+console.log(list);　　// [10]
+
+const obj = {a:100};
+obj.name = 'apple';
+obj.a = 10000;
+console.log(obj);　　// {a:10000,name:'apple'}
+```
+
+
 
 ##### 19.js深浅拷贝
 
@@ -636,4 +764,30 @@ javascript语言的一大特点就是单线程
 ##### 32.for in和for of区别
 
 ##### 33.前端登录实现过程
+
+##### 34.同步和异步的区别
+
+- **同步**：不同进程协同完成某项工作而先后次序调整（通过阻塞、唤醒等方式），同步强调的是顺序性，谁先谁后。异步不存在顺序性
+- **异步**：浏览器访问服务器请求，用户正常操作，浏览器在后端进行请求。等请求完，页面不刷新，加载出新内容。
+
+
+
+##### 35.回流与重绘
+
+
+
+##### 36.渐进增强与优雅降级
+
+- **渐进增强**：针对低版本浏览器进行构建页面，保证最基本的功能，然后在针对高级浏览器进行效果、交互等改进。达到更好的用户体验
+- **优雅降级**：一开始构建完整的功能，然后针对低版本浏览器进行兼容。
+
+
+
+##### 37.递归
+
+
+
+##### 38.高阶函数
+
+高阶函数是对其它函数进行操作的函数，它接收函数作为参数或将函数作为返回值输出。
 
