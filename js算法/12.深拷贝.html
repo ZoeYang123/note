@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+</head>
+
+<body>
+    <script>
+        var newObj = {};
+        function deepClone(obj, newObj) {
+            for (key in obj) {
+                var item = obj[key];
+                if (item instanceof Array) {
+                    newObj[key] = [];
+                    deepClone(item, newObj[key])
+                } else if (item instanceof Object) {
+                    newObj[key] = {};
+                    deepClone(item, newObj[key])
+                } else {
+                    newObj[key] = item;
+                }
+            }
+            //return newObj
+        }
+        deepClone(obj, newObj)
+    </script>
+</body>
+
+</html>

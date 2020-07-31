@@ -715,14 +715,51 @@ console.log(obj);　　// {a:10000,name:'apple'}
 ##### 19.js深浅拷贝
 
 - **浅拷贝：**如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是地址值，其中一个对象改变了这个地址，就会影响到另一个对象
+- 对象:Object.assign(target,sources);  es6新增方法可以浅拷贝
+- 数组：contact、slice
 
-源码
+```javascript
+//数组
+var a = [1,2,3,4];
+var b = a.contact();
+var c = a.slice();
+//对象
+
+var obj = {name:"Yang"},obj2={};
+Object.assign(obj2)
+```
 
 
 
 - **深拷贝：**将一个对象从内存中完整的拷贝出来，从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。
 
-源码
+```javascript
+//JSON内置对象深拷贝
+var a = {name:"Yang",age:18,friends:[{name:"Lily",age:20},{name:"Bob",age:21}]};
+var b = JSON.parse(JSON.stringify(a));
+
+var newObj = {};
+function deepClone(obj, newObj) {
+    for (key in obj) {
+        var item = obj[key];
+        if (item instanceof Array) {
+            newObj[key] = [];
+            deepClone(item, newObj[key])
+        } else if (item instanceof Object) {
+            newObj[key] = {};
+            deepClone(item, newObj[key])
+        } else {
+            newObj[key] = item;
+        }
+    }
+    //return newObj
+}
+deepClone(a, newObj)
+```
+
+JSON可处理一般的对象进行深拷贝，但是不能处理函数、正则等对象。
+
+
 
 ##### 20.函数柯力化的实现
 
@@ -785,9 +822,33 @@ console.log(obj);　　// {a:10000,name:'apple'}
 
 ##### 37.递归
 
+如果一个函数在内部可以调用其本身，那么这个函数就是递归函数。
+
+函数内部自己调用自己，这个函数就是递归。
+
+递归很容易发生“栈溢出”错误（stack overflow），所以必须加退出条件
+
 
 
 ##### 38.高阶函数
 
 高阶函数是对其它函数进行操作的函数，它接收函数作为参数或将函数作为返回值输出。
+
+```javascript
+//接收函数作为参数
+function fn(callback){
+    callback && callback()
+}
+fn(function(){
+    console.log("fn")
+})
+
+//函数作为返回值输出
+function fn(){
+    return function(){
+        
+    }
+}
+fn();
+```
 
