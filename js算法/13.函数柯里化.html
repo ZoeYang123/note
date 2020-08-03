@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>函数柯里化</title>
 </head>
+
 <body>
     <script>
-        var add = function(){
-            var _args = [];
-            return function(){
-                if(arguments.length === 0){
-                    return _args.reduce(function(a,b){
-                        return a + b;
-                    })
-                }
-                [].push.apply(_args,arguments);
-                console.log(arguments)
-               return arguments.callee;
-            }
+        function add() {
+            var args = [...arguments]; //[1]
+            var fn = function () {
+                console.log(1)
+                args.push(...arguments);
+                return fn
+            };
+            fn.toString = function () {
+                console.log(2)
+                return args.reduce(function (a, b) {
+                    return a + b;
+                });
+            };
+            return fn;
         }
-
-        var sum = add();
-        sum(100,200)(500)(600,700);
-        console.log(sum())
+        console.log(add(1)(1, 2, 3)(2)) // 9
     </script>
-    
+
 </body>
+
 </html>
