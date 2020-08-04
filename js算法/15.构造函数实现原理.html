@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数</title>
+</head>
+
+<body>
+    <script>
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        //正常写法
+        var person1 = new Person("Yang", 18);
+
+        //使用代码模拟，在非IE浏览器中测试，IE浏览器不支持
+        var person2 = {};
+        person2.__proto__ = Person.prototype;
+        Person.call(person2, "Yang", 18);
+    </script>
+</body>
+
+</html>

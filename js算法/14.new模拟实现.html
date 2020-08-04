@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new的模拟实现</title>
+</head>
+<body>
+    <script>
+        //方法1
+        // function _new(Fn,...args){
+        //     // var obj = {};
+        //     // obj.__proto__ = Fn.prototype;
+        //     let obj = Object.create(Fn.prototype);
+        //     Fn.call(obj,...args);
+        //     return obj;
+        // }
+        //方法2
+        function _new(){
+            var obj = new Object();
+            Constructor = [].shift.call(arguments); //删除arguments，取得外部传入的构造函数
+            obj.__proto__ = Constructor.prototype;
+            Constructor.apply(obj,arguments);
+            return obj
+        }
+
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+        }
+
+        var p = _new(Person,"yang",18);
+        var p1 = new Person("yang",18);
+        var per = {
+            name:"yang",
+            age:18
+        }
+        // var o = Object.create(Person.prototype);
+        // var o1 = Object.create(per);
+        // console.log(o)
+        console.log(p)
+    </script>
+    
+</body>
+</html>

@@ -913,6 +913,49 @@ console.log(add(1)(1, 2, 3)(2)) // 9
 
 ##### 21.js模拟new操作符
 
+new的结果是一个新对象，在模拟实现的时候，要创建一个新对象。实例的__ proto__属性会指向构造函数的prototype，建立起这样的关系，实例可以访问原型上的属性
+
+```javascript
+//方法1
+function _new(Fn,...args){
+    // var obj = {};
+    // obj.__proto__ = Fn.prototype;
+    let obj = Object.create(Fn.prototype);
+    console.log(obj)
+    Fn.call(obj,...args);
+    return obj;
+}
+//方法2
+function _new(){
+    var obj = new Object();
+    Constructor = [].shift.call(arguments); //删除arguments，取得外部传入的构造函数
+    obj.__proto__ = Constructor.prototype;
+    Constructor.apply(obj,arguments);
+    return obj
+}
+var p = _new(Person,"yang",18);
+```
+
+> 理解Object.create()
+
+Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__ proto__。Object.create()是一个继承方法，返回一个新对象，带着指定的原型对象和属性。
+
+> 理解Object.assign(target, ...sources)
+
+```javascript
+const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log(target);
+// expected output: Object { a: 1, b: 4, c: 5 }
+console.log(returnedTarget);
+// expected output: Object { a: 1, b: 4, c: 5 }
+```
+
+
+
 ##### 22.Promise实现
 
 ##### 23.async/await
@@ -920,6 +963,8 @@ console.log(add(1)(1, 2, 3)(2)) // 9
 ##### 24.js的防抖与节流
 
 ##### 25.设计模式
+
+
 
 ##### 26.http状态码
 
@@ -930,6 +975,8 @@ console.log(add(1)(1, 2, 3)(2)) // 9
 - **5****：服务端错误，server error
 - **304****：Not Modified。指定日期后未修改，不返回资源
 
+
+
 ##### 27.封装JSONP
 
 ##### 28.跨域
@@ -938,7 +985,38 @@ console.log(add(1)(1, 2, 3)(2)) // 9
 
 ##### 30.js实现instanceof
 
+
+
 ##### 31.构造函数实现原理
+
+- 构造函数中没有显示的创建Object对象，实际上后台自动创建了
+- 直接给this对象赋值属性和方法，this即指向创建的对象
+- 没有后台返回值，后台自动返回了该对象
+
+
+
+**new在执行时会做四件事情：**
+
+- 在内存中创建一个新的空对象
+- 让this指向这个新的对象
+- 执行构造函数里面的代码，给这个新对象添加属性和方法
+- 返回这个新对象（所以构造函数里面不需要return）
+
+```javascript
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+//正常写法
+var person1 = new Person("Yang",18);
+
+//使用代码模拟，在非IE浏览器中测试，IE浏览器不支持
+var person2 = {};
+person2.__proto__ = Person.prototype;
+Person.call(person2,"Yang",18);
+```
+
+
 
 ##### 32.for in和for of区别
 
@@ -995,3 +1073,7 @@ fn();
 ```
 
 ##### 39.WebSocket
+
+
+
+##### 40.理解axios原理
