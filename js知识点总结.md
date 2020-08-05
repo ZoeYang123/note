@@ -979,7 +979,123 @@ console.log(returnedTarget);
 
 ##### 27.封装JSONP
 
+**原理**
+
+<u>创建一个`script`标签，把那个跨域的API数据接口地址，赋值给script的src</u>，还要在这个地址中向服务器<u>传递该函数名</u>（可以通过问号传参：？callback = show）。
+
+```javascript
+// 封装的jsonp
+function jsonp({ url, params, callback }) {
+    return new Promise((resolve, reject) => {
+        let script = document.createElement('script');//创建script标签
+        window[callback] = function (data) {
+            resolve(data)
+            document.body.removeChild(script)
+        },
+            params = { ...params, callback }; // wd=b&callback=show
+        let arrs = [];
+        for (let key in params) {
+            arrs.push(`${key}=${params[key]}`)
+        }
+        script.src = `${url}?${arrs.join('&')}`
+        document.body.appendChild(script)
+    })
+}
+jsonp({
+    url: 'http://localhost:3000/list',
+    params: { wd: 'Iloveyou' },
+    callback: 'show'
+}).then(data => {
+    console.log(data)
+})
+```
+
+
+
 ##### 28.跨域
+
+源 = 协议 + 域名 + 端口号。
+
+如果两个url协议、域名、端口号完全一致，那么这两个url就是同源。同源策略限制的是数据访问，引用的css、js和图片的时候，其实并不知道其内容，只是在引用。
+
+> 1.jsonp
+
+利用`script`标签没有跨域限制的漏洞，网页可以得到从其他来源动态产生的JSON数据。JSONP请求一定需要对方服务器做支持才可以。JSONP和AJAX相同，都是客户端向服务器发送请求，从服务器端获取数据方式。但AJAX属于同源策略，JSONP属于非同源策略（跨域请求）。
+
+**JSONP优缺点**
+
+JSONP优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。**缺点是仅支持get方法具有局限性，不安全可能会遭受XSS攻击。**JSONP是通过动态创建script，动态创建script的时候只能用GET，不能用POST
+
+**JSONP实现流程**
+
+![](D:\用户目录\我的文档\HBuilderProject\ywj\note\image\jsonp.png)
+
+- 声明一个回调函数，其<u>函数名做参数值，传递给跨域请求数据的服务器</u>，函数形式为要获取目标数据（服务器返回的data）
+- 创建一个`script`标签，把那个跨域的API数据接口地址，赋值给script的src，还要在这个地址中向服务器传递该函数名（可以通过问号传参：？callback = show）。
+- 服务器接收到请求后，需要进行特殊的处理：把传递进来的函数名和它需要给你的数据拼接成一个字符串，例如：传递进去的函数名是show，它准备好的数据show（"我18岁"）。
+- 最后服务器把准备的数据通过http协议返回给客服端，客服端在调用执行之前的声明函数（show），对返回的数据进行操作。
+
+jsonp+jquery的ajax
+
+```javascript
+//客服端
+$.ajax({
+    url: "http:127.0.0.1:3000/list",
+    type: "GET",
+    dataType: "jsonp",
+    jsonpCallback: "show",//->自定义传递给服务器的函数名，而不是使用jQuery自动生成的，可省略
+    jsonp: "callback",//->把传递函数名的那个形参callback，可省略
+    success: function (res) {
+        console.log(res)
+    }
+})
+
+//服务端
+var express = require("express");
+var app = express();
+
+app.get('/list',(req,res)=>{
+    //callback回调函数
+    let { callback = Function.prototype } = req.query;
+    var data = {
+        code: 0,
+        msg: '成功！'
+    }
+    res.send(`${callback}(${JSON.stringify(data)})`)
+})
+
+app.listen(3000,()=>{
+    console.log("success！！！")
+})
+```
+
+
+
+> 2.CORS（ Cross-Origin Resource Sharing）跨源资源共享（ W3C 推荐的）
+
+```javascript
+app.use((req,res,next)=>{
+    //CORS跨域
+    // const CORS = {
+    //     ALLOW_ORIGIN:"http://127.0.0.1:3000",
+    //     ALLOW_METHODS:"PUT,POST,GET,DELETE,OPTIONS,HEAD",
+    //     HEADERS:'Content-Type,Content-Length,Authorization,Accept,X-Requested-With',
+    //     CREDENTIALS:true
+    // }
+    // res.header("Access-Control-Allow-Origin",CORS.ALLOW_ORIGIN);
+    // res.header("Access-Control-Allow-Credentials",CORS.CREDENTIALS);
+    // res.header("Access-Control-Allow-Headers",CORS.HEADERS);
+    // res.header("Access-Control-Allow-Methods",CORS.HEADERS);
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Content-Type', 'application/json;charset=utf-8');
+    next()
+})
+```
+
+
 
 ##### 29.**手动实现map(forEach以及filter也类似)**
 
