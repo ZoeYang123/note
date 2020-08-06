@@ -1095,7 +1095,19 @@ app.use((req,res,next)=>{
 })
 ```
 
+> 3.http proxy(代理)
 
+
+
+> 4.nginx方向代理
+
+
+
+> 5.postMessage
+
+
+
+> 6.socket.io
 
 ##### 29.**手动实现map(forEach以及filter也类似)**
 
