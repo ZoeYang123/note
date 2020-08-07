@@ -1109,9 +1109,66 @@ app.use((req,res,next)=>{
 
 > 6.socket.io
 
-##### 29.**手动实现map(forEach以及filter也类似)**
+> 7.node中间件代理（两次跨域）
 
-##### 30.js实现instanceof
+实现原理：同源策略是浏览器需要遵循的标准，而如果是服务器向服务器请求就无需遵循同源策略。
+
+- 客服端向代理服务器发送请求，代理服务器接受客户端请求
+- 代理服务器将请求转发给服务器
+- 代理服务器拿到服务器的响应数据
+- 将响应转发给客户端
+
+
+
+> 8.window.name + iframe
+
+
+
+> 9.document.domain + iframe
+
+
+
+##### 29.**手动实现map、forEach、filter也类似**
+
+
+
+
+
+##### 30.js实现instanceof、typeof
+
+> **instanceof**
+
+用于检测构造函数的prototype属性是否出现在某个实例对象的原型链
+
+- 首先获取类型的原型
+- 然后获得对象的原型
+- 然后一直循环判断对象的原型是否等于类型的原型，直到对象原型为 null，因为原型链最终为 null
+
+```javascript
+function myInstanceof(left,right){
+    let prototype = right.prototype;
+    left = left.__proto__;
+    while(true){
+        if(left === null || left ===undefined){
+            return false;
+        }
+        if(prototype === left){
+            return true;
+        }
+        left = left.__proto__
+    }
+}
+```
+
+![QQ图片20200807174038](D:\用户目录\我的文档\HBuilderProject\ywj\note\image\QQ图片20200807174038.png)
+
+
+
+> **typeof**
+
+typeof操作符返回一个字符串，表示未经计算的操作数的类型
+
+
 
 
 
