@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>map实现原理</title>
 </head>
+
 <body>
-    
+    <script>
+        Array.prototype.myMap = function (callback) {
+            if (!Array.isArray(this) || !this.length || typeof callback !== "function") {
+                return [];
+            } else {
+                let result = [];
+                for (var i = 0; i < this.length; i++) {
+                    result.push(callback(this[i], i, this))
+                }
+                return result
+            }
+        }
+
+        var a = [1, 2, 3, 4, 5, 6];
+        var b = a.myMap((item) => item + 2);
+        // var c = a.map(item=>item+2);
+        console.log(b)
+    </script>
 </body>
+
 </html>

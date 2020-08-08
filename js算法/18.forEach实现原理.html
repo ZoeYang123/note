@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach</title>
+</head>
+
+<body>
+    <script>
+        Array.prototype.myforEach = function (callback) {
+            // 第一个参数必须要为function
+            if (typeof callback !== "function") {
+                throw new TypeError(callback + " is not a function");
+            }
+            for (var i = 0; i < this.length; i++) {
+                callback(this[i], i, this)
+            }
+        }
+        // var a = [1, 2, 3, 4, 5, 6];
+        // var b = a.myforEach((item) => item + 2);
+        var c = null;
+        c.myforEach(item => console.log(item))
+    </script>
+</body>
+
+</html>

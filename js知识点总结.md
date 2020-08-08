@@ -1128,9 +1128,43 @@ app.use((req,res,next)=>{
 
 
 
-##### 29.**手动实现map、forEach、filter也类似**
+##### 29.**手动实现map、forEach、filter**、reduce
 
+> map
 
+```javascript
+Array.prototype.myMap = function (callback) {
+    if (!Array.isArray(this) || !this.length || typeof callback !== "function") {
+        return [];
+    } else {
+        let result = [];
+        for (var i = 0; i < this.length; i++) {
+            result.push(callback(this[i], i, this))
+        }
+        return result
+    }
+}
+```
+
+> forEach
+
+```javascript
+ Array.prototype.myforEach = function (callback) {
+     // 第一个参数必须要为function
+     if (typeof callback !== "function") {
+         throw new TypeError(callback + " is not a function");
+     }
+     for (var i = 0; i < this.length; i++) {
+         callback(this[i], i, this)
+     }
+ }
+```
+
+> filter
+
+```javascript
+
+```
 
 
 
