@@ -958,6 +958,63 @@ console.log(returnedTarget);
 
 ##### 22.Promise实现
 
+**异步**是非阻塞的，异步逻辑与主逻辑相互独立，主逻辑不需要等待异步逻辑完成，而是可以立刻继续下去。
+
+**promise**有三个状态
+
+- pending[待定]初始状态
+
+- fulfilled[实现]操作成功
+- rejected[拒绝]操作失败
+
+Promise一旦从等待状态变成为其它状态就永远不能更改状态了。无法取消Promise，错误需要通过回调函数来捕获。
+
+```javascript
+function myPromise(constructor) {
+    let self = this;
+    self.status = "pending";
+    self.value = undefined; //定义状态为resolved的时候的状态
+    self.reason = undefined;//定义状态为rejected的时候的状态
+    function resolve(value) {
+        //两个==="pending"，保证了状态的改变是不可逆的
+        if (self.status === "pending") {
+            self.value = value;
+            self.status = "resolved";
+        }
+    }
+
+    function reject(reason) {
+        //两个==="pending"，保证了状态的改变是不可逆的
+        if (self.status === "pending") {
+            self.value = value;
+            self.status = "rejected";
+        }
+    }
+    //捕获构造异常
+    try {
+        constructor(resolve, reject);
+    } catch (e) {
+        reject(e);
+    }
+}
+
+// 定义链式调用的then方法
+myPromise.prototype.then = function (onFullfilled, onRejected) {
+    let self = this;
+    switch (self.status) {
+        case "resolved":
+            onFullfilled(self.value);
+            break;
+        case "rejected":
+            onRejected(self.reason);
+            break;
+        default:
+    }
+}
+```
+
+
+
 ##### 23.async/await
 
 ##### 24.js的防抖与节流
