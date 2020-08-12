@@ -1017,6 +1017,14 @@ myPromise.prototype.then = function (onFullfilled, onRejected) {
 
 ##### 23.async/await
 
+async/await是一种建立在Promise之上的编写异步或非阻塞代码的新方法，被普遍认为是JS异步操作的最终且最优雅的解决方案。
+
+async是异步的意思，await是async wait的简写，即异步等待。所以从语义上就很好理解 async 用于声明一个 function 是异步的，而await 用于等待一个异步方法执行完成。
+
+await操作符等的是一个返回结果，那么如果是同步的情况，那就直接返回了。如果是异步的情况，await会阻塞整一个流程，直到结果返回之后，才会继续下面代码。
+
+
+
 ##### 24.js的防抖与节流
 
 ##### 25.设计模式
@@ -1220,7 +1228,25 @@ Array.prototype.myMap = function (callback) {
 > filter
 
 ```javascript
-
+function filter(arr, filterCallback) {
+  // 首先，检查传递的参数是否正确。
+  if (!Array.isArray(arr) || !arr.length || typeof filterCallback !== 'function') 
+  {
+    return [];
+  } else {
+    let result = [];
+     // 每次调用此函数时，我们都会创建一个 result 数组
+     // 因为我们不想改变原始数组。
+    for (let i = 0, len = arr.length; i < len; i++) {
+      // 检查 filterCallback 的返回值是否是真值
+      if (filterCallback(arr[i], i, arr)) { 
+      // 如果条件为真，则将数组元素 push 到 result 中
+        result.push(arr[i]);
+      }
+    }
+    return result; // return the result array
+  }
+}
 ```
 
 
@@ -1295,6 +1321,10 @@ Person.call(person2,"Yang",18);
 
 
 ##### 32.for in和for of区别
+
+> for in
+
+
 
 ##### 33.前端登录实现过程
 
