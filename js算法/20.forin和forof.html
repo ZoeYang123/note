@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for in和for of</title>
+</head>
+
+<body>
+    <script>
+        var a = [1.1, 2.2, 3.3, 4.4, 5.5];
+        Array.prototype.get = function () {
+
+        }
+        Array.prototype.b = [1,2,3]
+        for (var i in a) {
+            console.log(i);//for in遍历数组会遍历到数组原型上的属性和方法, 更适合遍历对象
+        }
+
+        for(var i of a){
+            console.log(i)
+        }
+    </script>
+</body>
+
+</html>

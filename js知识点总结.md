@@ -1027,6 +1027,33 @@ await操作符等的是一个返回结果，那么如果是同步的情况，那
 
 ##### 24.js的防抖与节流
 
+> 防抖
+
+**函数防抖**是指在事件被触发n秒后在执行回调，如果在这n秒内事件又被触发，则重新计算函数执行时间。可以使用在一些点击请求的事件上，避免因为用户的多次点击向后端发送多次请求
+
+```javascript
+function debance(fn, delay) {
+    let timer = null;
+    return (...args) => {
+        const _this = this;
+        clearTimeout(timer)
+        timer = setTimeout(function () {
+            fn.apply(_this,args);
+        }, delay)
+    }
+}
+```
+
+> 节流
+
+**函数节流**是只规定一个单位时间内，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。节流可以使用在scroll函数的事件监听上，通过事件节流来降低事件调用的频率。
+
+```javascript
+
+```
+
+
+
 ##### 25.设计模式
 
 
@@ -1323,6 +1350,14 @@ Person.call(person2,"Yang",18);
 ##### 32.for in和for of区别
 
 > for in
+
+- 遍历数组会遍历到数组原型上的属性和方法，更适合遍历对象
+- for in可以遍历到原型上的方法和属性，如果不想遍历原型的方法和属性的话，可以在循环内部判断一下，hasOwnPropery方法可以判断属性是否是该对象的实例属性
+
+> for of
+
+- 遍历数组的值，而不是索引，不会遍历原型
+- `forEach`不支持`break, continue, return`等
 
 
 

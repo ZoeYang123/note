@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数防抖</title>
+</head>
+
+<body>
+    <button id="demo">提交</button>
+    <script>
+        function success() {
+            console.log("提交成功!");
+        }
+        function debounce(fn, delay) {
+            let timer = null;
+            return (...args) => {
+                const _this = this;
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    fn.apply(_this,args);
+                }, delay)
+            }
+        }
+        const onDebounce = debounce(success, 1500);
+        const demo = document.getElementById("demo");
+        demo.addEventListener("click", onDebounce);
+
+
+
+    </script>
+</body>
+
+</html>
