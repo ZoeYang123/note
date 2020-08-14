@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>函数节流</title>
 </head>
+
 <body>
     <button id="demo">函数节流</button>
     <script>
+        var onThrottle = throttle(success, 2000);
+        function throttle(fn, dely) {
+            var flag = true;
+            return (...args) => {
+                const _this = this;
+                if (!flag) return;
+                flag = false;
+                setTimeout(function () {
+                    fn.apply(_this,args);
+                    flag = true;
+                }, dely)
+            }
+        }
 
+        function success() {
+            console.log("节流")
+        }
+
+        var demo = document.getElementById("demo");
+        demo.addEventListener("click", onThrottle);
     </script>
 </body>
+
 </html>

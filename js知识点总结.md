@@ -1049,7 +1049,18 @@ function debance(fn, delay) {
 **函数节流**是只规定一个单位时间内，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。节流可以使用在scroll函数的事件监听上，通过事件节流来降低事件调用的频率。
 
 ```javascript
-
+function throttle(fn, dely) {
+    var flag = true;
+    return (...args) => {
+        const _this = this;
+        if (!flag) return;
+        flag = false;
+        setTimeout(function () {
+            fn.apply(_this,args);
+            flag = true;
+        }, dely)
+    }
+}
 ```
 
 
@@ -1371,6 +1382,12 @@ Person.call(person2,"Yang",18);
 
 
 ##### 35.回流与重绘
+
+```javascript
+
+```
+
+
 
 
 
